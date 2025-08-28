@@ -16,7 +16,7 @@ function Form() {
         event.preventDefault(); // Prevent the default form submission (page reload)
         
         try {
-            const response = await fetch('/contact', { // The proxy will redirect this to http://localhost:5000/contact
+            const response = await fetch('/contact', { // The proxy will redirect this to http://localhost:5001/contact
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
