@@ -1,0 +1,13 @@
+/node_modules
+.env
+/dist
+.DS_Store
+/logs
+npm-debug.log
+yarn-error.log
+.idea
+.vscode
+*.local
+*.log
+coverage
+*.sqlite    
