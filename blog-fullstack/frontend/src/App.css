@@ -1,0 +1,109 @@
+/* frontend/src/App.css */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f9fafb;
+  color: #374151;
+  margin: 0;
+}
+
+.App {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.main-nav h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.create-post-link {
+  background-color: #3b82f6;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.create-post-link:hover {
+  background-color: #2563eb;
+}
+
+/* PostCard Component */
+.post-card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+}
+
+.post-card h3 {
+  margin-top: 0;
+}
+
+.post-author {
+  font-style: italic;
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.read-more-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* PostDetail Page */
+.post-detail article {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.post-content {
+  line-height: 1.7;
+  white-space: pre-wrap; /* Preserves line breaks in content */
+}
+
+/* Comment Section */
+.comment-section {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.comment-form { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.comment-form input, .comment-form textarea { padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; }
+.comment-form button { align-self: flex-start; background-color: #10b981; color: white; padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer; }
+
+.comment-list { list-style: none; padding: 0; margin-top: 30px; }
+.comment-list li { padding: 15px; border-top: 1px solid #e5e7eb; }
+.comment-list strong { margin-right: 8px; }
+
+/* CreatePost Page */
+.create-post-page h2 { text-align: center; }
+.post-form { display: flex; flex-direction: column; gap: 15px; }
+.post-form input, .post-form textarea { font-size: 1rem; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; }
+.post-form textarea { min-height: 200px; resize: vertical; }
+.post-form button { padding: 12px; font-size: 1rem; background-color: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; }
+
