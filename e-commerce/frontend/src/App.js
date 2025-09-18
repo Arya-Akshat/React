@@ -8,6 +8,8 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
+import Success from './pages/Success'; // <-- ADD THIS
+import Cancel from './pages/Cancel'; // <-- ADD THIS
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/success" element={<Success />} /> {/* <-- ADD THIS */}
+          <Route path="/cancel" element={<Cancel />} /> {/* <-- ADD THIS */}
           <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
           <Route path="/admin" element={<ProtectedRoute adminOnly={true}><Admin /></ProtectedRoute>} />
         </Routes>
