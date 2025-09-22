@@ -22,47 +22,61 @@ const Cart = () => {
   };
 
   const handleCheckout = async () => {
-    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+    try {
+      const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
 
-    if (!res) {
-      alert('Razorpay SDK failed to load. Are you online?');
-      return;
+      if (!res) {
+        alert('Razorpay SDK failed to load. Are you online?');
+        return;
+      }
+
+      const { data: order } = await api.post('/razorpay/create-order');
+
+      if (!order) {
+        alert('Payments are disabled currently.');
+        return;
+      }
+
+      const options = {
+        key: 'YOUR_KEY_ID', // Enter the Key ID generated from the Dashboard
+        amount: order.amount,
+        currency: order.currency,
+        name: 'MERN-Shop',
+        description: 'Test Transaction',
+        order_id: order.id,
+        handler: async function (response) {
+          const data = {
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+          };
+
+          const result = await api.post('/razorpay/verify-payment', data);
+
+          alert(result.data.status);
+        },
+        prefill: {
+          name: 'Test User',
+          email: 'test.user@example.com',
+          contact: '9999999999',
+        },
+        notes: {
+          address: 'Test Address',
+        },
+        theme: {
+          color: '#3399cc',
+        },
+      };
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    } catch (error) {
+      if (error.response && (error.response.status === 500 || error.response.status === 400)) {
+        alert('Payments are disabled currently.');
+      } else {
+        console.error("Checkout error:", error);
+        alert("An error occurred during checkout.");
+      }
     }
-
-    const { data: order } = await api.post('/razorpay/create-order');
-
-    const options = {
-      key: 'YOUR_KEY_ID', // Enter the Key ID generated from the Dashboard
-      amount: order.amount,
-      currency: order.currency,
-      name: 'MERN-Shop',
-      description: 'Test Transaction',
-      order_id: order.id,
-      handler: async function (response) {
-        const data = {
-          razorpay_payment_id: response.razorpay_payment_id,
-          razorpay_order_id: response.razorpay_order_id,
-          razorpay_signature: response.razorpay_signature,
-        };
-
-        const result = await api.post('/razorpay/verify-payment', data);
-
-        alert(result.data.status);
-      },
-      prefill: {
-        name: 'Test User',
-        email: 'test.user@example.com',
-        contact: '9999999999',
-      },
-      notes: {
-        address: 'Test Address',
-      },
-      theme: {
-        color: '#3399cc',
-      },
-    };
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
   };
 
   if (!cart || cart.items.length === 0) {
