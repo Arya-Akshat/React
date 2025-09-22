@@ -1,38 +1,74 @@
 // frontend/src/pages/Cart.js
 import React, { useContext } from 'react';
 import CartContext from '../context/CartContext';
-import { loadStripe } from '@stripe/stripe-js';
 import api from '../services/api';
 import './Cart.css';
-
-// Make sure to add your publishable key.
-const stripePromise = loadStripe('your_stripe_publishable_key_pk_...');
 
 const Cart = () => {
   const { cart } = useContext(CartContext);
 
-  const handleCheckout = async () => {
-    try {
-        const stripe = await stripePromise;
-        const { data: session } = await api.post('/checkout/create-session');
-        
-        const result = await stripe.redirectToCheckout({
-            sessionId: session.id,
-        });
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
 
-        if (result.error) {
-            alert(result.error.message);
-        }
-    } catch (error) {
-        console.error("Checkout error:", error);
-        alert("An error occurred during checkout.");
+  const handleCheckout = async () => {
+    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+
+    if (!res) {
+      alert('Razorpay SDK failed to load. Are you online?');
+      return;
     }
+
+    const { data: order } = await api.post('/razorpay/create-order');
+
+    const options = {
+      key: 'YOUR_KEY_ID', // Enter the Key ID generated from the Dashboard
+      amount: order.amount,
+      currency: order.currency,
+      name: 'MERN-Shop',
+      description: 'Test Transaction',
+      order_id: order.id,
+      handler: async function (response) {
+        const data = {
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_signature: response.razorpay_signature,
+        };
+
+        const result = await api.post('/razorpay/verify-payment', data);
+
+        alert(result.data.status);
+      },
+      prefill: {
+        name: 'Test User',
+        email: 'test.user@example.com',
+        contact: '9999999999',
+      },
+      notes: {
+        address: 'Test Address',
+      },
+      theme: {
+        color: '#3399cc',
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
   };
 
   if (!cart || cart.items.length === 0) {
     return <h2>Your cart is empty</h2>;
   }
-  
+
   const totalPrice = cart.items.reduce((sum, item) => sum + item.productId.price * item.quantity, 0);
 
   return (
