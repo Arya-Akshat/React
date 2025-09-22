@@ -22,7 +22,6 @@ const Navbar = () => {
       <div className="navbar-links">
         {auth.user ? (
           <>
-            <span>Welcome, {auth.user.username}</span>
             {auth.user.role === 'admin' && <Link to="/admin">Admin</Link>}
             <Link to="/cart">Cart ({cartItemCount})</Link>
             <button onClick={handleLogout}>Logout</button>

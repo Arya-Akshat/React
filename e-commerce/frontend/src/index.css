@@ -8,6 +8,7 @@
   --rosso-corsa: #D70000;
   --black: #000000;
   --white: #FFFFFF;
+  --sandy-beige: #F5F5DC;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
   font-family: 'Pirata One', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--maya-blue);
+  background-color: var(--sandy-beige);
   color: var(--black);
 }
 
