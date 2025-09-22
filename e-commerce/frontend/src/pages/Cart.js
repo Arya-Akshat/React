@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import CartContext from '../context/CartContext';
 import { loadStripe } from '@stripe/stripe-js';
 import api from '../services/api';
+import './Cart.css';
 
 // Make sure to add your publishable key.
 const stripePromise = loadStripe('your_stripe_publishable_key_pk_...');

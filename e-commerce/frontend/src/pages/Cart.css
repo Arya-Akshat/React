@@ -1,0 +1,70 @@
+.cart-page {
+  background-color: var(--white);
+  border: 2px solid var(--dirty-brown);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.cart-page h2 {
+  font-size: 2.5rem;
+  color: var(--lapis-lazuli);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--dirty-brown);
+  padding-bottom: 1.5rem;
+}
+
+.cart-item img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid var(--dirty-brown);
+}
+
+.cart-item h3 {
+  font-size: 1.8rem;
+  color: var(--lapis-lazuli);
+  margin: 0;
+}
+
+.cart-item p {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  font-family: sans-serif;
+}
+
+.cart-total {
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.cart-total h3 {
+  font-size: 2rem;
+  color: var(--rosso-corsa);
+}
+
+.checkout-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--tangerine-yellow);
+  color: var(--black);
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: 'Pirata One', cursive;
+}
+
+.checkout-btn:hover {
+  background-color: #ffdb4d;
+}
