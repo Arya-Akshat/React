@@ -40,7 +40,7 @@ const ProductPage = () => {
   return (
     <div className="product-page">
       <div className="product-image-container">
-        <img src={product.imageUrl} alt={product.name} className="product-image" />
+        <img src={product.imageUrl} alt={product.name} className="product-image" onError={(e) => { e.target.onerror = null; e.target.src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/share/2753.jpg" }} />
       </div>
       <div className="product-details-container">
         <h1 className="product-title">{product.name}</h1>

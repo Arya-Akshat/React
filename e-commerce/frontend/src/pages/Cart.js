@@ -90,7 +90,7 @@ const Cart = () => {
       <h2>Your Shopping Cart</h2>
       {cart.items.map(item => (
         <div key={item.productId._id} className="cart-item">
-          <img src={item.productId.imageUrl} alt={item.productId.name}/>
+          <img src={item.productId.imageUrl} alt={item.productId.name} onError={(e) => { e.target.onerror = null; e.target.src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/share/2753.jpg" }} />
           <div>
             <h3>{item.productId.name}</h3>
             <div className="quantity-controls">
