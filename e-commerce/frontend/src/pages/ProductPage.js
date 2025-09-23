@@ -44,7 +44,7 @@ const ProductPage = () => {
       </div>
       <div className="product-details-container">
         <h1 className="product-title">{product.name}</h1>
-        <p className="product-price">${product.price.toFixed(2)}</p>
+        <p className="product-price">₹{product.price.toFixed(2)}</p>
         <p className="product-description">{product.description}</p>
         <button className="add-to-cart-btn" onClick={() => addToCart(product._id, 1)}>
           Add to Cart

@@ -98,12 +98,12 @@ const Cart = () => {
               <span>{item.quantity}</span>
               <button onClick={() => addToCart(item.productId._id, 1)}>+</button>
             </div>
-            <p>Price: ${item.productId.price.toFixed(2)}</p>
+            <p>Price: ₹{item.productId.price.toFixed(2)}</p>
           </div>
         </div>
       ))}
       <div className="cart-total">
-        <h3>Total: ${totalPrice.toFixed(2)}</h3>
+        <h3>Total: ₹{totalPrice.toFixed(2)}</h3>
         <button className="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
       </div>
     </div>
