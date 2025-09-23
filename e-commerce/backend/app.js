@@ -11,7 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: 'https://reactproject-hazel-six.vercel.app',
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Database Connection
