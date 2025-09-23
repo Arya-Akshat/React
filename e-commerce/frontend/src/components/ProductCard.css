@@ -8,8 +8,10 @@
   transition: transform 0.2s;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
+}
+
+.product-card > a {
+  margin-bottom: auto;
 }
 
 .product-card:hover {
@@ -35,6 +37,7 @@
   font-weight: bold;
   color: var(--rosso-corsa);
   margin: 0;
+  margin-bottom: 0.5rem;
 }
 
 .product-card button {
@@ -48,7 +51,6 @@
   cursor: pointer;
   transition: background-color 0.2s;
   font-family: 'Lato', sans-serif;
-  margin-top: auto;
 }
 
 .product-card button:hover {
