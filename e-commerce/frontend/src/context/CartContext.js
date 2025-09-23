@@ -2,6 +2,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import api from '../services/api';
 import AuthContext from './AuthContext';
+import { toast } from 'react-toastify';
 
 const CartContext = createContext();
 
@@ -29,13 +30,26 @@ export const CartProvider = ({ children }) => {
     try {
       const { data } = await api.post('/cart/add', { productId, quantity });
       setCart(data);
+      toast.success('Item added to cart successfully!');
     } catch (error) {
       console.error("Failed to add to cart", error);
+      toast.error('Failed to add item to cart.');
+    }
+  };
+
+  const removeFromCart = async (productId) => {
+    try {
+      const { data } = await api.delete(`/cart/remove/${productId}`);
+      setCart(data);
+      toast.success('Item removed from cart successfully!');
+    } catch (error) {
+      console.error("Failed to remove from cart", error);
+      toast.error('Failed to remove item from cart.');
     }
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, setCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, setCart }}>
       {children}
     </CartContext.Provider>
   );

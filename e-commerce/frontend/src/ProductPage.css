@@ -31,7 +31,7 @@
   margin-top: 0;
   margin-bottom: 1rem;
   color: var(--lapis-lazuli);
-  font-family: 'Pirata One', cursive;
+  font-family: 'Lato', sans-serif;
 }
 
 .product-price {
@@ -39,7 +39,7 @@
   font-weight: bold;
   color: var(--rosso-corsa);
   margin-bottom: 1.5rem;
-  font-family: 'Pirata One', cursive;
+  font-family: 'Lato', sans-serif;
 }
 
 .product-description {
@@ -62,7 +62,7 @@
   transition: background-color 0.2s;
   align-self: flex-start; /* Don't stretch full width */
   min-width: 200px;
-  font-family: 'Pirata One', cursive;
+  font-family: 'Lato', sans-serif;
 }
 
 .add-to-cart-btn:hover {

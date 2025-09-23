@@ -42,4 +42,28 @@ router.post('/add', authMiddleware, async (req, res) => {
   }
 });
 
+// DELETE item from cart (protected)
+router.delete('/remove/:productId', authMiddleware, async (req, res) => {
+  const { productId } = req.params;
+  try {
+    let cart = await Cart.findOne({ userId: req.user.userId });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+    // Check if product in cart
+    const itemIndex = cart.items.findIndex(p => p.productId == productId);
+    if (itemIndex > -1) {
+      // Remove item
+      cart.items.splice(itemIndex, 1);
+      cart = await cart.save();
+      // Populate before sending back
+      await cart.populate('items.productId');
+      res.status(200).json(cart);
+    } else {
+      res.status(404).json({ message: "Item not found in cart" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 module.exports = router;
