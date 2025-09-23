@@ -6,6 +6,9 @@
   text-align: center;
   box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-card:hover {
@@ -44,6 +47,7 @@
   cursor: pointer;
   transition: background-color 0.2s;
   font-family: 'Lato', sans-serif;
+  margin-top: auto;
 }
 
 .product-card button:hover {
