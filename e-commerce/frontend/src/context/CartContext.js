@@ -27,6 +27,10 @@ export const CartProvider = ({ children }) => {
   }, [auth.token]);
 
   const addToCart = async (productId, quantity) => {
+    if (!auth.token) {
+      toast.error('Please register and login first.');
+      return;
+    }
     try {
       const { data } = await api.post('/cart/add', { productId, quantity });
       setCart(data);
