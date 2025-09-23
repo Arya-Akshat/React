@@ -5,7 +5,7 @@ import api from '../services/api';
 import './Cart.css';
 
 const Cart = () => {
-  const { cart, removeFromCart } = useContext(CartContext);
+  const { cart, addToCart, decreaseQuantity } = useContext(CartContext);
 
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -93,9 +93,12 @@ const Cart = () => {
           <img src={item.productId.imageUrl} alt={item.productId.name}/>
           <div>
             <h3>{item.productId.name}</h3>
-            <p>Quantity: {item.quantity}</p>
+            <div className="quantity-controls">
+              <button onClick={() => decreaseQuantity(item.productId._id)}>-</button>
+              <span>{item.quantity}</span>
+              <button onClick={() => addToCart(item.productId._id, 1)}>+</button>
+            </div>
             <p>Price: ${item.productId.price.toFixed(2)}</p>
-            <button onClick={() => removeFromCart(item.productId._id)}>Remove</button>
           </div>
         </div>
       ))}

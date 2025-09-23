@@ -37,19 +37,19 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const removeFromCart = async (productId) => {
+  const decreaseQuantity = async (productId) => {
     try {
-      const { data } = await api.delete(`/cart/remove/${productId}`);
+      const { data } = await api.put(`/cart/decrease/${productId}`);
       setCart(data);
-      toast.success('Item removed from cart successfully!');
+      toast.success('Item quantity updated successfully!');
     } catch (error) {
-      console.error("Failed to remove from cart", error);
-      toast.error('Failed to remove item from cart.');
+      console.error("Failed to decrease quantity", error);
+      toast.error('Failed to update item quantity.');
     }
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, setCart }}>
+    <CartContext.Provider value={{ cart, addToCart, decreaseQuantity, setCart }}>
       {children}
     </CartContext.Provider>
   );

@@ -42,8 +42,8 @@ router.post('/add', authMiddleware, async (req, res) => {
   }
 });
 
-// DELETE item from cart (protected)
-router.delete('/remove/:productId', authMiddleware, async (req, res) => {
+// PUT decrease item quantity in cart (protected)
+router.put('/decrease/:productId', authMiddleware, async (req, res) => {
   const { productId } = req.params;
   try {
     let cart = await Cart.findOne({ userId: req.user.userId });
@@ -52,8 +52,14 @@ router.delete('/remove/:productId', authMiddleware, async (req, res) => {
     // Check if product in cart
     const itemIndex = cart.items.findIndex(p => p.productId == productId);
     if (itemIndex > -1) {
-      // Remove item
-      cart.items.splice(itemIndex, 1);
+      let productItem = cart.items[itemIndex];
+      if (productItem.quantity > 1) {
+        productItem.quantity -= 1;
+        cart.items[itemIndex] = productItem;
+      } else {
+        // Remove item if quantity is 1
+        cart.items.splice(itemIndex, 1);
+      }
       cart = await cart.save();
       // Populate before sending back
       await cart.populate('items.productId');

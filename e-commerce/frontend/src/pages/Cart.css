@@ -62,9 +62,31 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s;
-  font-family: 'Pirata One', cursive;
+  font-family: 'Lato', sans-serif;
 }
 
 .checkout-btn:hover {
   background-color: #ffdb4d;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantity-controls button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--dirty-brown);
+  background-color: var(--white);
+  color: var(--black);
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.quantity-controls span {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
